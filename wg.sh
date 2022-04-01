@@ -76,9 +76,9 @@ function installQuestions() {
 	sleep 1.5
 	echo "Welcome! Today we will be setting up a new wireguard connection..."
 	sleep 2
+	echo ""
 	echo "You will be asked a few questions before proceeding, and" 
 	echo "the default values are perfectly acceptable."
-	sleep 2
 	echo ""
 	sleep 3
 
