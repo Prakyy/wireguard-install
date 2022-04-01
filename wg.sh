@@ -416,10 +416,16 @@ function uninstallWg() {
 		WG_RUNNING=$?
 
 		if [[ ${WG_RUNNING} -eq 0 ]]; then
+			echo ""
+			echo ""
 			echo -e "${RED}WireGuard could not be uninstalled properly.${NC}"
+			echo ""
 			exit 1
 		else
+			echo ""
+			echo ""
 			echo -e "${ORANGE}WireGuard has been completely removed from your system.${NC}"
+			echo ""
 			exit 0
 		fi
 	else
