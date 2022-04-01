@@ -427,7 +427,6 @@ function uninstallWg() {
 			exit 1
 		else
 			echo ""
-			echo ""
 			echo -e "${ORANGE}WireGuard has been completely removed from your system.${NC}"
 			echo ""
 			exit 0
@@ -445,7 +444,6 @@ function manageMenu() {
 	
 	echo ""
 	echo -e "${LightGreen}WireGuard is up and running...${NC}"
-	echo ""
 	echo ""
 	echo "What do you want to do?"
 	echo "   1) Add a new user"
