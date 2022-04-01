@@ -220,10 +220,9 @@ net.ipv6.conf.all.forwarding = 1" >/etc/sysctl.d/wg.conf
 	newClient
 	echo ""
 	echo ""
-	sleep 2
 	echo "And we are done..." 
 	echo ""
-	sleep 1
+	sleep 1.5
 	echo "You should run this script again if you need to add new users or remove old ones-"
 	echo "Don't worry - we won't be going through the whole setup process again."
 	echo ""
@@ -246,9 +245,11 @@ function newClient() {
 	echo ""
 	echo "Specify new user's name"
 	echo "The name must consist of alphanumeric character. It may also include an underscore or a dash and can't exceed 15 chars."
+	echo ""
 
 	until [[ ${CLIENT_NAME} =~ ^[a-zA-Z0-9_-]+$ && ${CLIENT_EXISTS} == '0' && ${#CLIENT_NAME} -lt 16 ]]; do
 		read -rp "Client name: " -e CLIENT_NAME
+		echo ""
 		CLIENT_EXISTS=$(grep -c -E "^### Client ${CLIENT_NAME}\$" "/etc/wireguard/${SERVER_WG_NIC}.conf")
 
 		if [[ ${CLIENT_EXISTS} == '1' ]]; then
