@@ -217,10 +217,12 @@ net.ipv6.conf.all.forwarding = 1" >/etc/sysctl.d/wg.conf
 	newClient
 	echo ""
 	echo ""
+	sleep 2
 	echo "And we are done..." 
 	echo ""
-	echo "You should run this script again if you need to add new users or remove"
-	echo "old ones (don't worry - we won't be going through the whole setup process again)."
+	sleep 1
+	echo "You should run this script again if you need to add new users or remove old ones-"
+	echo "Don't worry - we won't be going through the whole setup process again."
 	echo ""
 
 	# Check if WireGuard is running
@@ -268,7 +270,7 @@ function newClient() {
 
 	BASE_IP=$(echo "$SERVER_WG_IPV4" | awk -F '.' '{ print $1"."$2"."$3 }')
 	until [[ ${IPV4_EXISTS} == '0' ]]; do
-		read -rp "Client's WireGuard IPv4: ${BASE_IP}." -e -i "${DOT_IP}" DOT_IP
+		read -rp "Client's WireGuard IPv4 will be: ${BASE_IP}." -e -i "${DOT_IP}" DOT_IP
 		CLIENT_WG_IPV4="${BASE_IP}.${DOT_IP}"
 		IPV4_EXISTS=$(grep -c "$CLIENT_WG_IPV4/24" "/etc/wireguard/${SERVER_WG_NIC}.conf")
 
@@ -281,7 +283,7 @@ function newClient() {
 
 	BASE_IP=$(echo "$SERVER_WG_IPV6" | awk -F '::' '{ print $1 }')
 	until [[ ${IPV6_EXISTS} == '0' ]]; do
-		read -rp "Client's WireGuard IPv6: ${BASE_IP}::" -e -i "${DOT_IP}" DOT_IP
+		read -rp "Client's WireGuard IPv6 will be: ${BASE_IP}::" -e -i "${DOT_IP}" DOT_IP
 		CLIENT_WG_IPV6="${BASE_IP}::${DOT_IP}"
 		IPV6_EXISTS=$(grep -c "${CLIENT_WG_IPV6}/64" "/etc/wireguard/${SERVER_WG_NIC}.conf")
 
