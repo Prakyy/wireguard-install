@@ -70,6 +70,7 @@ function installQuestions() {
 	#using cloudflare dns to detect external ip because sometimes it is inaccurate using internal data
 	external_ip=`dig +short txt ch whoami.cloudflare @1.0.0.1`
 	echo "This script was aquired from: https://github.com/Prakyy/wireguard-install"
+	sleep 3
 	echo ""
 	echo ""
 	echo "Welcome! Today we will be setting up a new wireguard connection..."
