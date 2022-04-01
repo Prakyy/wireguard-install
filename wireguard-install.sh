@@ -66,15 +66,18 @@ function initialCheck() {
 }
 
 function installQuestions() {
+	#using cloudflare dns to detect external ip because sometimes it is inaccurate using internal data
+	external_ip=`dig +short txt ch whoami.cloudflare @1.0.0.1`
+	#external_ip=`sed -e 's/^"//' -e 's/"$//' <<<"$external_ip"`
 	echo "Welcome to the WireGuard installer!"
-	echo "The git repository is available at: https://github.com/angristan/wireguard-install"
+	echo "The git repository is available at: https://github.com/Prakyy/wireguard-install"
 	echo ""
 	echo "I need to ask you a few questions before starting the setup."
 	echo "You can leave the default options and just press enter if you are ok with them."
 	echo ""
 
 	# Detect public IPv4 or IPv6 address and pre-fill for the user
-	SERVER_PUB_IP=$(ip -4 addr | sed -ne 's|^.* inet \([^/]*\)/.* scope global.*$|\1|p' | awk '{print $1}' | head -1)
+	SERVER_PUB_IP=`sed -e 's/^"//' -e 's/"$//' <<<"$external_ip"`
 	if [[ -z ${SERVER_PUB_IP} ]]; then
 		# Detect public IPv6 address
 		SERVER_PUB_IP=$(ip -6 addr | sed -ne 's|^.* inet6 \([^/]*\)/.* scope global.*$|\1|p' | head -1)
